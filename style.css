@@ -1,0 +1,521 @@
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #faf6f0;
+    --text-color: #3a2f2a;
+    --card-bg: #ffffff;
+    --accent: #c45c26;
+    --accent-hover: #a34a1c;
+    --border: #e8d9c8;
+    --sidebar-size: 48px;
+    --font-main: 'Nunito', system-ui, sans-serif;
+    --font-logo: 'Pacifico', cursive;
+    --shadow: 0 4px 14px rgba(0,0,0,0.08);
+    --radius: 12px;
+}
+
+body.dark-mode {
+    --bg-color: #1e1a17;
+    --text-color: #f0e6dc;
+    --card-bg: #2a2420;
+    --accent: #e07a3d;
+    --accent-hover: #f08a4d;
+    --border: #3d342e;
+    --shadow: 0 4px 14px rgba(0,0,0,0.35);
+}
+
+html {
+    font-size: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* ===== LAYOUT COM LATERAIS ===== */
+.page-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: var(--sidebar-size);
+    flex-shrink: 0;
+    background-color: #f5e6d3;
+    /* Padrão quadriculado estilo tecido (gingham) */
+    background-image:
+        linear-gradient(45deg, #e8d4b8 25%, transparent 25%),
+        linear-gradient(-45deg, #e8d4b8 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e8d4b8 75%),
+        linear-gradient(-45deg, transparent 75%, #e8d4b8 75%);
+    background-size: 16px 16px;
+    background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    border-left: 1px solid #d4c0a8;
+    border-right: 1px solid #d4c0a8;
+}
+
+body.dark-mode .sidebar {
+    background-color: #2c241c;
+    background-image:
+        linear-gradient(45deg, #3a3028 25%, transparent 25%),
+        linear-gradient(-45deg, #3a3028 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #3a3028 75%),
+        linear-gradient(-45deg, transparent 75%, #3a3028 75%);
+    border-color: #4a3e34;
+}
+
+.main-content {
+    flex: 1;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 28px 50px;
+}
+
+/* Melhorias para Desktop */
+@media (min-width: 1200px) {
+    :root {
+        --sidebar-size: 70px;
+    }
+    .main-content {
+        max-width: 1040px;
+        padding: 0 40px 60px;
+    }
+    .recipe-img {
+        height: 320px;
+    }
+    .logo {
+        font-size: 3rem;
+    }
+    .recipe-content {
+        padding: 32px;
+    }
+}
+
+/* ===== HEADER ===== */
+.header {
+    text-align: center;
+    padding: 32px 0 24px;
+    position: relative;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+}
+
+.logo {
+    font-family: var(--font-logo);
+    font-size: 2.6rem;
+    color: var(--accent);
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.tagline {
+    font-size: 1.05rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-top: 6px;
+}
+
+.settings-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--card-bg);
+    border: 2px solid var(--border);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+}
+
+.settings-btn:hover {
+    border-color: var(--accent);
+    transform: translateY(-50%) scale(1.08);
+}
+
+/* ===== MODAL CONFIGURAÇÕES ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 100;
+    transition: opacity 0.25s;
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 110;
+    width: 90%;
+    max-width: 380px;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-color);
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    color: var(--accent);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-color);
+    line-height: 1;
+    opacity: 0.7;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.setting-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.setting-item label {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.toggle-btn, .report-btn, .zoom-btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 2px solid var(--border);
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.toggle-btn:hover, .report-btn:hover, .zoom-btn:hover {
+    border-color: var(--accent);
+    background: var(--accent);
+    color: white;
+}
+
+.report-btn {
+    background: #fff0f0;
+    border-color: #e0a0a0;
+    color: #b33;
+}
+
+body.dark-mode .report-btn {
+    background: #3a2020;
+    border-color: #8a4040;
+    color: #f88;
+}
+
+.report-btn:hover {
+    background: #c33;
+    color: white;
+    border-color: #c33;
+}
+
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.zoom-btn.small {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+}
+
+#zoom-level {
+    min-width: 50px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ===== RECEITAS ===== */
+.recipes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.recipe-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.recipe-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    display: block;
+    background: #e8d9c8;
+}
+
+.recipe-content {
+    padding: 24px;
+}
+
+.recipe-content h2 {
+    font-size: 1.7rem;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.recipe-meta {
+    font-size: 0.9rem;
+    opacity: 0.75;
+    margin-bottom: 18px;
+}
+
+.recipe-content h3 {
+    font-size: 1.1rem;
+    margin: 16px 0 8px;
+    color: var(--text-color);
+}
+
+.ingredients, .instructions {
+    margin-left: 20px;
+    margin-bottom: 8px;
+}
+
+.ingredients li, .instructions li {
+    margin-bottom: 6px;
+}
+
+/* ===== AÇÕES (CURTIR / COMENTAR) ===== */
+.actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+}
+
+.like-btn, .comment-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border-radius: 30px;
+    border: 2px solid var(--border);
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.like-btn:hover, .comment-toggle-btn:hover {
+    border-color: var(--accent);
+}
+
+.like-btn.liked {
+    background: #ffe8e0;
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+body.dark-mode .like-btn.liked {
+    background: #3a2a22;
+}
+
+.like-icon {
+    font-size: 1.2rem;
+    transition: transform 0.2s;
+}
+
+/* ===== COMENTÁRIOS ===== */
+.comments-section {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--border);
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+    max-height: 260px;
+    overflow-y: auto;
+}
+
+.comment-item {
+    background: var(--bg-color);
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+}
+
+.comment-item .author {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.comment-item .text {
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+}
+
+.comment-item .time {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.comment-name, .comment-text {
+    padding: 10px 12px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: var(--card-bg);
+    color: var(--text-color);
+    resize: vertical;
+}
+
+.comment-name:focus, .comment-text:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.submit-comment {
+    align-self: flex-start;
+    padding: 10px 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.submit-comment:hover {
+    background: var(--accent-hover);
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    text-align: center;
+    padding: 32px 0 16px;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 700px) {
+    :root {
+        --sidebar-size: 28px;
+    }
+
+    .logo {
+        font-size: 2rem;
+    }
+
+    .settings-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    .recipe-img {
+        height: 200px;
+    }
+
+    .recipe-content {
+        padding: 18px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .like-btn, .comment-toggle-btn {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --sidebar-size: 18px;
+    }
+
+    .main-content {
+        padding: 0 12px 30px;
+    }
+}

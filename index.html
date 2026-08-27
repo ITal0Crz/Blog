@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores Caseiros - Blog Culinário</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page-wrapper">
+        <!-- Lateral esquerda quadriculada -->
+        <aside class="sidebar left-sidebar" aria-hidden="true"></aside>
+
+        <!-- Conteúdo principal -->
+        <div class="main-content">
+            <header class="header">
+                <div class="header-top">
+                    <h1 class="logo">Sabores Caseiros</h1>
+                    <button id="settings-btn" class="settings-btn" title="Configurações" aria-label="Abrir configurações">
+                        ⚙️
+                    </button>
+                </div>
+                <p class="tagline">Receitas feitas com carinho, do jeito da vovó</p>
+            </header>
+
+            <!-- Modal de Configurações -->
+            <div id="settings-modal" class="modal hidden">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Configurações</h2>
+                        <button id="close-settings" class="close-btn" aria-label="Fechar">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="setting-item">
+                            <label for="dark-mode-toggle">Modo Escuro</label>
+                            <button id="dark-mode-toggle" class="toggle-btn">Ativar</button>
+                        </div>
+                        <div class="setting-item">
+                            <label>Zoom</label>
+                            <div class="zoom-controls">
+                                <button id="zoom-out" class="zoom-btn">A-</button>
+                                <span id="zoom-level">100%</span>
+                                <button id="zoom-in" class="zoom-btn">A+</button>
+                                <button id="zoom-reset" class="zoom-btn small">Resetar</button>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <label>Denúncia</label>
+                            <button id="report-btn" class="report-btn">Denunciar conteúdo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Overlay do modal -->
+            <div id="modal-overlay" class="modal-overlay hidden"></div>
+
+            <main class="recipes-container">
+                <!-- Receita 1: Brigadeiro -->
+                <article class="recipe-card" data-id="brigadeiro">
+                    <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=900&h=520&fit=crop&q=85" alt="Brigadeiro tradicional brasileiro com chocolate granulado" class="recipe-img" loading="lazy">
+                    <div class="recipe-content">
+                        <h2>Brigadeiro</h2>
+                        <p class="recipe-meta">Doce clássico brasileiro • 20 min • Rende 30 unidades</p>
+                        
+                        <h3>Ingredientes</h3>
+                        <ul class="ingredients">
+                            <li>1 lata de leite condensado (395g)</li>
+                            <li>1 colher de sopa de manteiga sem sal</li>
+                            <li>3 colheres de sopa de chocolate em pó (ou 4 de cacau)</li>
+                            <li>Chocolate granulado para enrolar</li>
+                        </ul>
+
+                        <h3>Modo de Preparo</h3>
+                        <ol class="instructions">
+                            <li>Em uma panela antiaderente, coloque o leite condensado, a manteiga e o chocolate em pó.</li>
+                            <li>Leve ao fogo médio-baixo e mexa sem parar com uma colher de pau ou espátula.</li>
+                            <li>Continue mexendo até o brigadeiro desgrudar do fundo da panela e formar uma massa consistente (cerca de 10-12 minutos).</li>
+                            <li>Despeje em um prato untado com manteiga e deixe esfriar completamente.</li>
+                            <li>Com as mãos untadas de manteiga, enrole bolinhas e passe no chocolate granulado.</li>
+                        </ol>
+
+                        <div class="actions">
+                            <button class="like-btn" data-recipe="brigadeiro">
+                                <span class="like-icon">♡</span>
+                                <span class="like-count">0</span> Curtidas
+                            </button>
+                            <button class="comment-toggle-btn" data-recipe="brigadeiro">
+                                💬 Comentários
+                            </button>
+                        </div>
+
+                        <div class="comments-section hidden" id="comments-brigadeiro">
+                            <div class="comments-list"></div>
+                            <div class="comment-form">
+                                <input type="text" placeholder="Seu nome" class="comment-name" maxlength="30">
+                                <textarea placeholder="Escreva um comentário..." class="comment-text" rows="2" maxlength="300"></textarea>
+                                <button class="submit-comment">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Receita 2: Pão de Queijo -->
+                <article class="recipe-card" data-id="pao-de-queijo">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=900&h=520&fit=crop&q=85" alt="Pão de Queijo mineiro fresco e dourado" class="recipe-img" loading="lazy">
+                    <div class="recipe-content">
+                        <h2>Pão de Queijo</h2>
+                        <p class="recipe-meta">Clássico mineiro • 40 min • Rende 30 unidades</p>
+                        
+                        <h3>Ingredientes</h3>
+                        <ul class="ingredients">
+                            <li>500g de polvilho azedo</li>
+                            <li>250ml de leite</li>
+                            <li>100ml de óleo</li>
+                            <li>2 ovos</li>
+                            <li>200g de queijo meia cura ralado (ou parmesão)</li>
+                            <li>1 colher de chá de sal</li>
+                        </ul>
+
+                        <h3>Modo de Preparo</h3>
+                        <ol class="instructions">
+                            <li>Ferva o leite com o óleo e o sal.</li>
+                            <li>Despeje o líquido quente sobre o polvilho e misture bem até esfriar um pouco.</li>
+                            <li>Adicione os ovos um a um, mexendo bem.</li>
+                            <li>Incorpore o queijo ralado até formar uma massa homogênea e maleável.</li>
+                            <li>Unte as mãos com óleo, faça bolinhas e coloque em assadeira untada.</li>
+                            <li>Asse em forno preaquecido a 180°C por cerca de 25-30 minutos, até dourar.</li>
+                        </ol>
+
+                        <div class="actions">
+                            <button class="like-btn" data-recipe="pao-de-queijo">
+                                <span class="like-icon">♡</span>
+                                <span class="like-count">0</span> Curtidas
+                            </button>
+                            <button class="comment-toggle-btn" data-recipe="pao-de-queijo">
+                                💬 Comentários
+                            </button>
+                        </div>
+
+                        <div class="comments-section hidden" id="comments-pao-de-queijo">
+                            <div class="comments-list"></div>
+                            <div class="comment-form">
+                                <input type="text" placeholder="Seu nome" class="comment-name" maxlength="30">
+                                <textarea placeholder="Escreva um comentário..." class="comment-text" rows="2" maxlength="300"></textarea>
+                                <button class="submit-comment">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Receita 3: Bolo de Cenoura -->
+                <article class="recipe-card" data-id="bolo-cenoura">
+                    <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&h=520&fit=crop&q=85" alt="Bolo de Cenoura com cobertura de chocolate" class="recipe-img" loading="lazy">
+                    <div class="recipe-content">
+                        <h2>Bolo de Cenoura com Cobertura</h2>
+                        <p class="recipe-meta">Clássico de lanche • 50 min • Rende 12 fatias</p>
+                        
+                        <h3>Ingredientes (Massa)</h3>
+                        <ul class="ingredients">
+                            <li>3 cenouras médias descascadas</li>
+                            <li>3 ovos</li>
+                            <li>1 xícara de óleo</li>
+                            <li>2 xícaras de açúcar</li>
+                            <li>2 xícaras de farinha de trigo</li>
+                            <li>1 colher de sopa de fermento em pó</li>
+                        </ul>
+
+                        <h3>Ingredientes (Cobertura)</h3>
+                        <ul class="ingredients">
+                            <li>4 colheres de sopa de chocolate em pó</li>
+                            <li>2 colheres de sopa de manteiga</li>
+                            <li>4 colheres de sopa de açúcar</li>
+                            <li>4 colheres de sopa de leite</li>
+                        </ul>
+
+                        <h3>Modo de Preparo</h3>
+                        <ol class="instructions">
+                            <li>Bata no liquidificador as cenouras, os ovos e o óleo até ficar homogêneo.</li>
+                            <li>Em uma tigela, misture o açúcar, a farinha e o fermento. Adicione a mistura do liquidificador e mexa bem.</li>
+                            <li>Despeje em forma untada e enfarinhada. Asse em forno preaquecido a 180°C por cerca de 40 minutos.</li>
+                            <li>Para a cobertura: misture todos os ingredientes em uma panela e leve ao fogo baixo até engrossar.</li>
+                            <li>Despeje a cobertura quente sobre o bolo ainda morno.</li>
+                        </ol>
+
+                        <div class="actions">
+                            <button class="like-btn" data-recipe="bolo-cenoura">
+                                <span class="like-icon">♡</span>
+                                <span class="like-count">0</span> Curtidas
+                            </button>
+                            <button class="comment-toggle-btn" data-recipe="bolo-cenoura">
+                                💬 Comentários
+                            </button>
+                        </div>
+
+                        <div class="comments-section hidden" id="comments-bolo-cenoura">
+                            <div class="comments-list"></div>
+                            <div class="comment-form">
+                                <input type="text" placeholder="Seu nome" class="comment-name" maxlength="30">
+                                <textarea placeholder="Escreva um comentário..." class="comment-text" rows="2" maxlength="300"></textarea>
+                                <button class="submit-comment">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Receita 4: Feijão Tropeiro -->
+                <article class="recipe-card" data-id="feijao-tropeiro">
+                    <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=900&h=520&fit=crop&q=85" alt="Feijão Tropeiro com bacon e linguiça" class="recipe-img" loading="lazy">
+                    <div class="recipe-content">
+                        <h2>Feijão Tropeiro</h2>
+                        <p class="recipe-meta">Prato mineiro tradicional • 40 min • Serve 6 pessoas</p>
+                        
+                        <h3>Ingredientes</h3>
+                        <ul class="ingredients">
+                            <li>500g de feijão cozido (com pouco caldo)</li>
+                            <li>200g de bacon picado</li>
+                            <li>150g de linguiça calabresa fatiada</li>
+                            <li>1 cebola grande picada</li>
+                            <li>3 dentes de alho picados</li>
+                            <li>4 ovos</li>
+                            <li>1 xícara de farinha de mandioca</li>
+                            <li>Cheiro-verde a gosto</li>
+                            <li>Sal e pimenta a gosto</li>
+                        </ul>
+
+                        <h3>Modo de Preparo</h3>
+                        <ol class="instructions">
+                            <li>Frite o bacon até dourar. Retire e reserve. Na mesma panela, frite a linguiça e reserve.</li>
+                            <li>Refogue a cebola e o alho na gordura que sobrou. Adicione os ovos e mexa até mexidos.</li>
+                            <li>Acrescente o feijão escorrido e misture bem.</li>
+                            <li>Adicione o bacon, a linguiça e a farinha de mandioca aos poucos, mexendo sempre.</li>
+                            <li>Finalize com cheiro-verde, ajuste o sal e sirva quente.</li>
+                        </ol>
+
+                        <div class="actions">
+                            <button class="like-btn" data-recipe="feijao-tropeiro">
+                                <span class="like-icon">♡</span>
+                                <span class="like-count">0</span> Curtidas
+                            </button>
+                            <button class="comment-toggle-btn" data-recipe="feijao-tropeiro">
+                                💬 Comentários
+                            </button>
+                        </div>
+
+                        <div class="comments-section hidden" id="comments-feijao-tropeiro">
+                            <div class="comments-list"></div>
+                            <div class="comment-form">
+                                <input type="text" placeholder="Seu nome" class="comment-name" maxlength="30">
+                                <textarea placeholder="Escreva um comentário..." class="comment-text" rows="2" maxlength="300"></textarea>
+                                <button class="submit-comment">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Receita 5: Moqueca de Peixe -->
+                <article class="recipe-card" data-id="moqueca">
+                    <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=900&h=520&fit=crop&q=85" alt="Moqueca de Peixe baiana com leite de coco e dendê" class="recipe-img" loading="lazy">
+                    <div class="recipe-content">
+                        <h2>Moqueca de Peixe</h2>
+                        <p class="recipe-meta">Especialidade baiana • 45 min • Serve 4 pessoas</p>
+                        
+                        <h3>Ingredientes</h3>
+                        <ul class="ingredients">
+                            <li>800g de peixe em postas (robalo, badejo ou tilápia)</li>
+                            <li>2 tomates em rodelas</li>
+                            <li>1 cebola grande em rodelas</li>
+                            <li>1 pimentão vermelho em tiras</li>
+                            <li>1 pimentão amarelo em tiras</li>
+                            <li>200ml de leite de coco</li>
+                            <li>2 colheres de sopa de azeite de dendê</li>
+                            <li>3 dentes de alho picados</li>
+                            <li>Suco de 1 limão</li>
+                            <li>Coentro e cebolinha a gosto</li>
+                            <li>Sal e pimenta a gosto</li>
+                        </ul>
+
+                        <h3>Modo de Preparo</h3>
+                        <ol class="instructions">
+                            <li>Tempere as postas de peixe com limão, sal, alho e pimenta. Deixe marinar por 15 minutos.</li>
+                            <li>Em uma panela (de preferência de barro), faça camadas: cebola, tomate, pimentões e peixe.</li>
+                            <li>Regue com o leite de coco e o azeite de dendê.</li>
+                            <li>Tampe e cozinhe em fogo médio por cerca de 20-25 minutos, sem mexer muito.</li>
+                            <li>Finalize com coentro e cebolinha picados. Sirva com arroz branco e pirão.</li>
+                        </ol>
+
+                        <div class="actions">
+                            <button class="like-btn" data-recipe="moqueca">
+                                <span class="like-icon">♡</span>
+                                <span class="like-count">0</span> Curtidas
+                            </button>
+                            <button class="comment-toggle-btn" data-recipe="moqueca">
+                                💬 Comentários
+                            </button>
+                        </div>
+
+                        <div class="comments-section hidden" id="comments-moqueca">
+                            <div class="comments-list"></div>
+                            <div class="comment-form">
+                                <input type="text" placeholder="Seu nome" class="comment-name" maxlength="30">
+                                <textarea placeholder="Escreva um comentário..." class="comment-text" rows="2" maxlength="300"></textarea>
+                                <button class="submit-comment">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Receita 6: Torta de Limão -->
+                <article class="recipe-card" data-id="torta-limao">
+                    <img src="https://images.unsplash.com/photo-1519915028121-7d3463d5b1ff?w=900&h=520&fit=crop&q=85" alt="Torta de Limão com merengue" class="recipe-img" loading="lazy">
+                    <div class="recipe-content">
+                        <h2>Torta de Limão</h2>
+                        <p class="recipe-meta">Sobremesa refrescante • 1h + geladeira • Serve 8 fatias</p>
+                        
+                        <h3>Ingredientes (Massa)</h3>
+                        <ul class="ingredients">
+                            <li>200g de biscoito maisena triturado</li>
+                            <li>100g de manteiga derretida</li>
+                        </ul>
+
+                        <h3>Ingredientes (Recheio)</h3>
+                        <ul class="ingredients">
+                            <li>1 lata de leite condensado</li>
+                            <li>1/2 xícara de suco de limão fresco</li>
+                            <li>1 caixa de creme de leite</li>
+                        </ul>
+
+                        <h3>Ingredientes (Merengue - opcional)</h3>
+                        <ul class="ingredients">
+                            <li>3 claras</li>
+                            <li>3 colheres de sopa de açúcar</li>
+                        </ul>
+
+                        <h3>Modo de Preparo</h3>
+                        <ol class="instructions">
+                            <li>Misture o biscoito triturado com a manteiga e forre o fundo de uma forma de fundo removível. Leve à geladeira por 20 minutos.</li>
+                            <li>Bata o leite condensado com o suco de limão até engrossar. Adicione o creme de leite e misture delicadamente.</li>
+                            <li>Despeje o recheio sobre a massa e leve à geladeira por pelo menos 4 horas.</li>
+                            <li>Para o merengue: bata as claras em neve, adicione o açúcar aos poucos até ficar firme. Cubra a torta e leve ao forno só para dourar (opcional).</li>
+                        </ol>
+
+                        <div class="actions">
+                            <button class="like-btn" data-recipe="torta-limao">
+                                <span class="like-icon">♡</span>
+                                <span class="like-count">0</span> Curtidas
+                            </button>
+                            <button class="comment-toggle-btn" data-recipe="torta-limao">
+                                💬 Comentários
+                            </button>
+                        </div>
+
+                        <div class="comments-section hidden" id="comments-torta-limao">
+                            <div class="comments-list"></div>
+                            <div class="comment-form">
+                                <input type="text" placeholder="Seu nome" class="comment-name" maxlength="30">
+                                <textarea placeholder="Escreva um comentário..." class="comment-text" rows="2" maxlength="300"></textarea>
+                                <button class="submit-comment">Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </main>
+
+            <footer class="footer">
+                <p>© 2026 Sabores Caseiros — Feito com ❤️ e muito tempero</p>
+            </footer>
+        </div>
+
+        <!-- Lateral direita quadriculada -->
+        <aside class="sidebar right-sidebar" aria-hidden="true"></aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
